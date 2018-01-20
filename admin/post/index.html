@@ -1,0 +1,508 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>abisreview</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-red.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+    #add-new-post {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="global-loader" class="mdl-progress mdl-js-progress mdl-progress__indeterminate">
+      <div id="global-loader-full" ></div>
+    </div>        
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">Post</span>
+          <div class="mdl-layout-spacer"></div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+            <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+              <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder">
+              <input class="mdl-textfield__input" type="text" id="search">
+              <label class="mdl-textfield__label" for="search">Enter your query...</label>
+            </div>
+          </div>
+          <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+            <i class="material-icons">more_vert</i>
+          </button>
+          <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+            <li class="mdl-menu__item">About</li>
+            <li class="mdl-menu__item">Contact</li>
+            <li class="mdl-menu__item">Legal information</li>
+          </ul>
+        </div>
+      </header>
+      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+        <header class="demo-drawer-header">
+          <img src="https://getmdl.io/templates/dashboard/images/user.jpg" class="demo-avatar">
+          <div class="demo-avatar-dropdown">
+            <span>hello@example.com</span>
+            <div class="mdl-layout-spacer"></div>
+            <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+              <i class="material-icons" role="presentation">arrow_drop_down</i>
+              <span class="visuallyhidden">Accounts</span>
+            </button>
+            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+              <li class="mdl-menu__item">hello@example.com</li>
+              <li class="mdl-menu__item">info@example.com</li>
+              <li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
+            </ul>
+          </div>
+        </header>
+        <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
+          <a class="mdl-navigation__link active" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Post</a>
+          <div class="mdl-layout-spacer"></div>
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content mdl-color--grey-100">
+        <div class="mdl-grid demo-content">
+          <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+            <thead>
+              <tr>
+                <th class="mdl-data-table__cell--non-numeric">Title</th>
+                <th class="mdl-data-table__cell--non-numeric">Content</th>
+                <th >Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">
+                  <img class="mdl-chip__contact" src="https://getmdl.io/templates/dashboard/images/user.jpg"></img>
+                  Acrylic (Transparent)
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">big content</td>
+                <td>
+                  <button class="mdl-button mdl-js-button mdl-button--icon  mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+              </tr>
+              
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">
+                  <img class="mdl-chip__contact" src="https://getmdl.io/templates/dashboard/images/user.jpg"></img>
+                  Acrylic (Transparent)
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">big content</td>
+                <td>
+                  <button class="mdl-button mdl-js-button mdl-button--icon  mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">
+                  <img class="mdl-chip__contact" src="https://getmdl.io/templates/dashboard/images/user.jpg"></img>
+                  Acrylic (Transparent)
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">big content</td>
+                <td>
+                  <button class="mdl-button mdl-js-button mdl-button--icon  mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">
+                  <img class="mdl-chip__contact" src="https://getmdl.io/templates/dashboard/images/user.jpg"></img>
+                  Acrylic (Transparent)
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">big content</td>
+                <td>
+                  <button class="mdl-button mdl-js-button mdl-button--icon  mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">
+                  <img class="mdl-chip__contact" src="https://getmdl.io/templates/dashboard/images/user.jpg"></img>
+                  Acrylic (Transparent)
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">big content</td>
+                <td>
+                  <button class="mdl-button mdl-js-button mdl-button--icon  mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">
+                  <img class="mdl-chip__contact" src="https://getmdl.io/templates/dashboard/images/user.jpg"></img>
+                  Acrylic (Transparent)
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">big content</td>
+                <td>
+                  <button class="mdl-button mdl-js-button mdl-button--icon  mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">
+                  <img class="mdl-chip__contact" src="https://getmdl.io/templates/dashboard/images/user.jpg"></img>
+                  Acrylic (Transparent)
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">big content</td>
+                <td>
+                  <button class="mdl-button mdl-js-button mdl-button--icon  mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">
+                  <img class="mdl-chip__contact" src="https://getmdl.io/templates/dashboard/images/user.jpg"></img>
+                  Acrylic (Transparent)
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">big content</td>
+                <td>
+                  <button class="mdl-button mdl-js-button mdl-button--icon  mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">
+                  <img class="mdl-chip__contact" src="https://getmdl.io/templates/dashboard/images/user.jpg"></img>
+                  Acrylic (Transparent)
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">big content</td>
+                <td>
+                  <button class="mdl-button mdl-js-button mdl-button--icon  mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">
+                  <img class="mdl-chip__contact" src="https://getmdl.io/templates/dashboard/images/user.jpg"></img>
+                  Acrylic (Transparent)
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">big content</td>
+                <td>
+                  <button class="mdl-button mdl-js-button mdl-button--icon  mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">
+                  <img class="mdl-chip__contact" src="https://getmdl.io/templates/dashboard/images/user.jpg"></img>
+                  Acrylic (Transparent)
+                </td>
+                <td class="mdl-data-table__cell--non-numeric">big content</td>
+                <td>
+                  <button id="edit" class="mdl-button mdl-js-button mdl-button--icon  mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">edit</i>
+                    <div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="edit">
+                    Edit
+                    </div>
+                  </button>
+                  <button id="delete" class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary mdl-js-ripple-effect">
+                    <i class="material-icons">delete</i>
+                    <div class="mdl-tooltip mdl-tooltip--top" data-mdl-for="delete">
+                    Delete
+                    </div>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--6-col">
+              <button id="prev-page" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                <i class="material-icons">arrow_backward</i>
+                <div class="mdl-tooltip mdl-tooltip--left" data-mdl-for="prev-page">Previous page</div>
+              </button>
+            </div>
+            <div class="mdl-cell mdl-cell--6-col">
+              <button id="next-page" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                <i class="material-icons">arrow_forward</i>
+                <div class="mdl-tooltip mdl-tooltip--right" data-mdl-for="next-page">Next page</div>
+              </button>
+            </div>
+          </div>
+          <button id="add-new-post" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--primary">
+            <i class="material-icons">add</i>
+          </button>
+          <div class="mdl-tooltip mdl-tooltip--left" data-mdl-for="add-new-post">Add new post</div>
+        </div>
+      </main>
+    </div>
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="position: fixed; left: -1000px; height: -1000px;">
+        <defs>
+          <mask id="piemask" maskContentUnits="objectBoundingBox">
+            <circle cx=0.5 cy=0.5 r=0.49 fill="white" />
+            <circle cx=0.5 cy=0.5 r=0.40 fill="black" />
+          </mask>
+          <g id="piechart">
+            <circle cx=0.5 cy=0.5 r=0.5 />
+            <path d="M 0.5 0.5 0.5 0 A 0.5 0.5 0 0 1 0.95 0.28 z" stroke="none" fill="rgba(255, 255, 255, 0.75)" />
+          </g>
+        </defs>
+      </svg>
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 250" style="position: fixed; left: -1000px; height: -1000px;">
+        <defs>
+          <g id="chart">
+            <g id="Gridlines">
+              <line fill="#888888" stroke="#888888" stroke-miterlimit="10" x1="0" y1="27.3" x2="468.3" y2="27.3" />
+              <line fill="#888888" stroke="#888888" stroke-miterlimit="10" x1="0" y1="66.7" x2="468.3" y2="66.7" />
+              <line fill="#888888" stroke="#888888" stroke-miterlimit="10" x1="0" y1="105.3" x2="468.3" y2="105.3" />
+              <line fill="#888888" stroke="#888888" stroke-miterlimit="10" x1="0" y1="144.7" x2="468.3" y2="144.7" />
+              <line fill="#888888" stroke="#888888" stroke-miterlimit="10" x1="0" y1="184.3" x2="468.3" y2="184.3" />
+            </g>
+            <g id="Numbers">
+              <text transform="matrix(1 0 0 1 485 29.3333)" fill="#888888" font-family="'Roboto'" font-size="9">500</text>
+              <text transform="matrix(1 0 0 1 485 69)" fill="#888888" font-family="'Roboto'" font-size="9">400</text>
+              <text transform="matrix(1 0 0 1 485 109.3333)" fill="#888888" font-family="'Roboto'" font-size="9">300</text>
+              <text transform="matrix(1 0 0 1 485 149)" fill="#888888" font-family="'Roboto'" font-size="9">200</text>
+              <text transform="matrix(1 0 0 1 485 188.3333)" fill="#888888" font-family="'Roboto'" font-size="9">100</text>
+              <text transform="matrix(1 0 0 1 0 249.0003)" fill="#888888" font-family="'Roboto'" font-size="9">1</text>
+              <text transform="matrix(1 0 0 1 78 249.0003)" fill="#888888" font-family="'Roboto'" font-size="9">2</text>
+              <text transform="matrix(1 0 0 1 154.6667 249.0003)" fill="#888888" font-family="'Roboto'" font-size="9">3</text>
+              <text transform="matrix(1 0 0 1 232.1667 249.0003)" fill="#888888" font-family="'Roboto'" font-size="9">4</text>
+              <text transform="matrix(1 0 0 1 309 249.0003)" fill="#888888" font-family="'Roboto'" font-size="9">5</text>
+              <text transform="matrix(1 0 0 1 386.6667 249.0003)" fill="#888888" font-family="'Roboto'" font-size="9">6</text>
+              <text transform="matrix(1 0 0 1 464.3333 249.0003)" fill="#888888" font-family="'Roboto'" font-size="9">7</text>
+            </g>
+            <g id="Layer_5">
+              <polygon opacity="0.36" stroke-miterlimit="10" points="0,223.3 48,138.5 154.7,169 211,88.5
+              294.5,80.5 380,165.2 437,75.5 469.5,223.3 	"/>
+            </g>
+            <g id="Layer_4">
+              <polygon stroke-miterlimit="10" points="469.3,222.7 1,222.7 48.7,166.7 155.7,188.3 212,132.7
+              296.7,128 380.7,184.3 436.7,125 	"/>
+            </g>
+          </g>
+        </defs>
+      </svg>
+
+      <dialog class="mdl-dialog my-dialog edit">
+        <div id="global-loader-dialoge" class="mdl-progress mdl-js-progress mdl-progress__indeterminate">
+          <div id="global-loader-full" ></div>
+        </div>        
+        <h4 class="mdl-dialog__title">Add new post</h4>
+        <div class="mdl-dialog__content">
+          <form action="#">
+            <div class="demo-card-image mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title mdl-card--expand"></div>
+              <div class="mdl-card__actions">
+                <span class="demo-card-image__filename">Image.jpg</span>
+              </div>
+              <div id="image-uploading" class="mdl-progress mdl-js-progress"></div>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--12-col">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="add-title">
+                  <label class="mdl-textfield__label" for="add-title">Title</label>
+                </div>            
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <textarea class="mdl-textfield__input" type="text" rows= "10" id="add-content" ></textarea>
+                  <label class="mdl-textfield__label" for="add-content">Content</label>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="mdl-dialog__actions">
+          <button type="button" class="mdl-button add-post-from-form">Add</button>
+          <button type="button" class="mdl-button close">Close</button>
+        </div>
+      </dialog>
+
+      <dialog class="mdl-dialog my-dialog delete">
+        <div id="global-loader-dialoge" class="mdl-progress mdl-js-progress mdl-progress__indeterminate">
+          <div id="global-loader-full" ></div>
+        </div>        
+        <h4 class="mdl-dialog__title">Delete this record</h4>
+        <div class="mdl-dialog__content">
+          <p>Are you sure you want to delete this record?</p>
+        </div>
+        <div class="mdl-dialog__actions">
+          <button type="button" class="mdl-button delete-post-from-form">delete</button>
+          <button type="button" class="mdl-button close">Close</button>
+        </div>
+      </dialog>
+      <div id="demo-snackbar-example" class="mdl-js-snackbar mdl-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action" type="button"></button>
+      </div>
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script>
+    var dialog = document.querySelector('dialog.edit');
+    var deletedialog = document.querySelector('dialog.delete');
+    var showDialogButton = document.querySelector('#add-new-post');
+    var showDeleteDialogButton = document.querySelector('#delete');
+    var editDialogButton = document.querySelector('#edit');
+    var loader = document.querySelector('#global-loader');
+    var dialogloader = dialog.querySelector('#global-loader-dialoge');
+    var deleteloader = deletedialog.querySelector('#global-loader-dialoge');
+    //Snackbar
+    var snackbarContainer = document.querySelector('#demo-snackbar-example');
+
+    loader.style.display = 'block';
+    setTimeout(function(){
+      loader.style.display = 'none';
+    },2000);
+
+
+    document.querySelector('#image-uploading').addEventListener('mdl-componentupgraded', function() {
+      this.MaterialProgress.setProgress(44);
+    });
+
+    if (! dialog.showModal) {
+      dialogPolyfill.registerDialog(dialog);
+    }    
+    if (! deletedialog.showModal) {
+      dialogPolyfill.registerDialog(deletedialog);
+    }
+    showDialogButton.addEventListener('click', function() {
+      dialog.showModal();
+    });
+    showDeleteDialogButton.addEventListener('click',function(){
+      deletedialog.showModal();
+    })
+    editDialogButton.addEventListener('click', function() {
+      dialog.showModal();
+    });
+    
+    deletedialog.querySelector('.close').addEventListener('click', function() {
+      deletedialog.close();
+      var data = {
+        message: 'Canceled !',
+        timeout: 2000
+      };
+      snackbarContainer.MaterialSnackbar.showSnackbar(data);
+    });
+
+    deletedialog.querySelector('.delete-post-from-form').addEventListener('click',function(){
+      deleteloader.style.display = 'block';
+      setTimeout(function(){
+        deletedialog.close();
+        var data = {
+          message: 'Post deleted successfully!',
+          timeout: 2000,
+        };
+        snackbarContainer.MaterialSnackbar.showSnackbar(data);
+        deleteloader.style.display = 'none';
+      },2000);
+    })
+
+    dialog.querySelector('.close').addEventListener('click', function() {
+      dialog.close();
+      var data = {
+        message: 'Popup closed.',
+        timeout: 2000,
+        actionHandler: function(event) {
+          dialog.showModal();
+        },
+        actionText: 'Undo'
+      };
+      snackbarContainer.MaterialSnackbar.showSnackbar(data);
+    });
+
+    dialog.querySelector('.add-post-from-form').addEventListener('click',function(){
+      dialogloader.style.display = 'block';
+      setTimeout(function(){
+        dialog.close();
+        var data = {
+          message: 'Post added successfully!',
+          timeout: 2000,
+        };
+        snackbarContainer.MaterialSnackbar.showSnackbar(data);
+        dialogloader.style.display = 'none';
+      },2000);
+    })
+  </script>
+  </body>
+</html>
