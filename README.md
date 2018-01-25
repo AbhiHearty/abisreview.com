@@ -1,4 +1,4 @@
-# React Js Base
+# ABHI review
 =======================
 
 ##### Packages used :
@@ -43,76 +43,6 @@ Building the code from development
 $ npm run build
 ```
 Note: If you dont have permisson running npm commands use sudo user
-
-```
-
-###### `.env` file 
-
-```
-
-REACT_APP_HOMEPAGE = / 
-REACT_APP_BASE_API = web
-
-```
-```
-Note: Ignore `code/node_modules`, `code/build` and `.env` files and folders before pushing to server.
-```
-
-## Folder Structure
-
-After creation, your project should look like this:
-
-```
-
-my-app/
-    README.md
-    node_modules/
-    package.json
-    package-lock.json
-    config/
-    scripts/
-    public/
-        index.html
-        favicon.ico
-    src/
-    actions/
-    assets/
-        css/
-        fonts/
-        images/
-    components/
-        layouts/
-            Application.jsx
-            Header.jsx
-            Loader.jsx
-            NotFountComponent.jsx
-    containers/
-        Dashboard/
-            index.jsx
-        Home/
-            index.jsx
-    locale/
-        combineLocale.jsx
-        index.jsx
-        common.jsx
-        home.jsx
-    middleware/
-        asyc.js
-    reducers/
-        home/
-        index.jsx
-    route/
-        index.js
-    utility/
-        locale/
-        Form.js
-        Utility.js
-        Validator.js
-        authorization.js
-        requestFacatory.js
-    App.js
-    index.js
-    registerServiceWorker.js
 
 ```
 
