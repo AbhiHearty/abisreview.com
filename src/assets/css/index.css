@@ -94,6 +94,7 @@ body {
     margin-top: -13px;
     font-size: 18px; }
   .carousel .thumbs-wrapper {
+    display:none;
     margin: 20px;
     overflow: hidden; }
   .carousel .thumbs {
@@ -249,6 +250,7 @@ body {
         opacity: 1;
         filter: alpha(opacity=100); }
   .carousel .carousel-status {
+    display: none;
     position: absolute;
     top: 0;
     right: 0;
