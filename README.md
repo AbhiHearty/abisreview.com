@@ -1,6 +1,8 @@
 # ABHI review
 =======================
 
++[![build status](https://img.shields.io/travis/reactjs/react-redux/master.svg?style=flat-square)](https://travis-ci.org/AbhiHearty/abisreview.com)
+
 ##### Packages used :
 * redux
 * react-redux
