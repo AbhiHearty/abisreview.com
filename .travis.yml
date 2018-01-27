@@ -1,5 +1,5 @@
 language: node_js
-os: "windows"
+os: windows
 node_js:
       - "6.10.0"
 branches:
@@ -8,6 +8,6 @@ install:
       - npm install -g firebase-tools
       - npm install
 script:
-      - sudo npm run build
+      - npm run build
 after_success:
       - firebase deploy --token $FIREBASE_TOKEN
