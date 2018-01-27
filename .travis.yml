@@ -11,5 +11,4 @@ script:
 after_success:
       - firebase deploy --token $FIREBASE_TOKEN
 env:
-  - CI=false
-  - REACT_APP_HOMEPAGE=/
+  - CI=false REACT_APP_HOMEPAGE=/
