@@ -35,15 +35,15 @@ export const ROUTE = [
             loading: Loader,
         })
     },
-    {
-        private: false,
+/*     {
+        private: true,
         exact: true,
         path: '/add-post',
         component: Loadable({
             loader: () => import ('../containers/AddPost'),
             loading: Loader,
         })
-    },
+    }, */
     {
         private: false,
         component: NotFound
