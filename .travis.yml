@@ -1,4 +1,7 @@
 language: node_js
+sudo: required
+dist: trusty
+group: deprecated-2017Q4
 node_js:
       - "8.0"
 branches:
@@ -7,6 +10,6 @@ install:
       - npm install -g firebase-tools
       - npm install
 script:
-      - npm run build
+      - sudo npm run build
 after_success:
       - firebase deploy --token $FIREBASE_TOKEN
