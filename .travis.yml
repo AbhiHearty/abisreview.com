@@ -1,9 +1,7 @@
 language: node_js
-sudo: required
-dist: trusty
-group: deprecated-2017Q4
+ os: "windows"
 node_js:
-      - "8.0"
+      - "6.10.0"
 branches:
       - feature/frontend_react
 install:
