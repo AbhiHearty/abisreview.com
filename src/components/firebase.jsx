@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import firebaseConf from 'firebase';
 import 'firebase/firestore';
 
 const config = {
@@ -9,5 +9,5 @@ const config = {
     storageBucket: "abhisreview.appspot.com",
     messagingSenderId: "398762034494"
 };
-firebase.initializeApp(config);
+export const firebase = firebaseConf.initializeApp(config);
 export const db = firebase.firestore();

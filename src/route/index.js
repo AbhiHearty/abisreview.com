@@ -35,7 +35,7 @@ export const ROUTE = [
             loading: Loader,
         })
     },
-/*     {
+    {
         private: true,
         exact: true,
         path: '/add-post',
@@ -43,7 +43,16 @@ export const ROUTE = [
             loader: () => import ('../containers/AddPost'),
             loading: Loader,
         })
-    }, */
+    },
+    {
+        private: false,
+        exact: true,
+        path: '/login',
+        component: Loadable({
+            loader: () => import ('../containers/Login'),
+            loading: Loader,
+        })
+    },
     {
         private: false,
         component: NotFound

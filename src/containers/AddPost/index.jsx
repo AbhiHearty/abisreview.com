@@ -9,8 +9,24 @@ import {db} from '../../components/firebase';
 class DashboardComponent extends Component {
     constructor(props){
         super(props);
+        let dynamciValues = [];
+        dynamciValues.push(<div class="col-sm-12">
+            <div class="row">
+                <div className="col-sm-5">
+                    <input type="text" name="key1" class="form-control" placeholder="Enter key"/>
+                </div>
+                <div className="col-sm-5">
+                    <input type="text" name="value1" class="form-control" placeholder="Enter value"/>
+                </div>
+                <div className="col-sm-2">
+                    <button type="button" class="btn btn-danger">Remove</button>
+                </div>
+            </div>
+        </div>);
         this.state = {
             editorState: EditorState.createEmpty(),
+            dynamciValues:dynamciValues,
+            dynamcivalue:1
         }
     }
     onEditorStateChange = (editorState) => {
@@ -109,6 +125,39 @@ class DashboardComponent extends Component {
             image:'https://vignette.wikia.nocookie.net/aonoexorcist/images/d/dc/Rin_Okumura_Transparent.png/revision/latest?cb=20140604034322'
             });
     }
+    getDynamicCastCrew(){
+        return this.state.dynamciValues.map((value)=>{return value;});
+    }
+    removeDynamicCastCrew = (index) => {
+        //check funtionality here
+        let dynamciValues = this.state.dynamciValues.splice(index, 1);
+        this.setState({
+            ...this.state,
+            dynamciValues:dynamciValues
+        });
+    }
+    addDynamicCastCrew = (e) =>{
+        let dynamciValues = this.state.dynamciValues;
+        let dynamcivalue = this.state.dynamcivalue + 1;
+        dynamciValues.push(<div class="col-sm-12">
+            <div class="row">
+                <div className="col-sm-5">
+                    <input type="text" name={"key"+dynamcivalue} class="form-control" placeholder="Enter key"/>
+                </div>
+                <div className="col-sm-5">
+                    <input type="text" name={"value"+dynamcivalue} class="form-control" placeholder="Enter value"/>
+                </div>
+                <div className="col-sm-2">
+                    <button type="button" onClick={(e)=>{this.removeDynamicCastCrew(dynamcivalue)}} class="btn btn-danger">Remove</button>
+                </div>
+            </div>
+        </div>);
+        this.setState({
+            ...this.state,
+            dynamciValues:dynamciValues,
+            dynamcivalue:dynamcivalue
+        });
+    }
     render() {
         const { editorState } = this.state;
         return (
@@ -121,21 +170,32 @@ class DashboardComponent extends Component {
                     <input type="text" required={true} className="form-control" id="title" name="title"/>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="cast_crew">Cast and Crew</label>
-                    <div class="col-sm-12">
-                        <div class="row">
-                            <div className="col-sm-6">
-                                <input type="text" class="form-control" placeholder="Enter key"/>
-                            </div>
-                            <div className="col-sm-6">
-                                <input type="text" class="form-control" placeholder="Enter value"/>
-                            </div>
-                        </div>
-                    </div>
+                    <label htmlFor="cast_crew">Cast and Crew <button type="button" onClick={this.addDynamicCastCrew} class="btn btn-primary">Add</button></label>
+                    {this.getDynamicCastCrew()}
                 </div>
                 <div className="form-group">
                     <label htmlFor="reviewby">Review By </label>
                     <input type="text" required={true} className="form-control" id="reviewby" name="reviewby"/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="youtube_trailer">Youtube id </label>
+                    <input type="text" required={true} className="form-control" id="youtube_trailer" name="youtube_trailer"/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="release_date">Release date </label>
+                    <input type="text" className="form-control" id="release_date" name="release_date"/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="movie_run_time">Movie run time </label>
+                    <input type="text" className="form-control" id="movie_run_time" name="movie_run_time"/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="censor_rating">Censor rating </label>
+                    <input type="text" className="form-control" id="censor_rating" name="censor_rating"/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="image">Image </label>
+                    <input type="text" className="form-control" id="image" name="image"/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="publish">Publish </label>
@@ -147,6 +207,10 @@ class DashboardComponent extends Component {
                         <input type="radio" id="publish0" name="publish" value={false} checked={true}/>
                         <label htmlFor="publish0">&nbsp; No</label>
                     </div>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="shortcontent">Short description </label>
+                    <input type="text" required={true} className="form-control" id="shortcontent" name="shortcontent"/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="content">Content </label>

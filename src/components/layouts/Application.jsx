@@ -6,6 +6,7 @@ import Header from './Header';
 import Footer from './Footer';
 import { ROUTE } from '../../route';
 import toastr from 'toastr';
+import {firebase} from '../firebase';
 
 /**
  * toast message configuration, If needed to used in any component we have to newly configure in that components also
@@ -49,34 +50,19 @@ class Application extends React.Component {
      *     Validate using the list of routes avaliable and blocks the route to proceed if the user is not logged in.
      */
     componentWillMount() {
-        // Validating the action using history props and clear the previous route value.
-        if(this.props.history.action === 'POP'){
-            sessionStorage.removeItem('proute');
-        }
-        // Validating the current route and restricts the user from accessing the route if not logged in.
-        if (!Authorization.isLoggedIn() && this.props.private) {
-            sessionStorage.setItem('proute',JSON.stringify(this.props.location));
-            toastr.error(locale.common.pleaseLoginToContinue);
-            this.props.history.push(process.env.REACT_APP_HOMEPAGE);
-            return false;
-        }
-        let current = this;
-        //Overwiting the default block funtion from history props for validation of auth user.
-        this.props.history.block((a) => {
-            if(Authorization.isLoggedIn()){
-                return true;
-            }else{
-                let allowRoute = ROUTE.filter(function(r){return current.checkRoute(r,a,current)}).length>0;
-                if(!allowRoute){
-                    sessionStorage.setItem('proute',JSON.stringify(a))
-                    toastr.success(locale.common.pleaseLoginToContinue);
-                    current.props.history.push(process.env.REACT_APP_HOMEPAGE);
-                }else{
-                    sessionStorage.removeItem('proute');
+        let comp = this;
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                //comp.props.history.push('/');
+              // User is signed in.
+            } else {
+                // Validating the current route and restricts the user from accessing the route if not logged in.
+                if (comp.props.private) {
+                    toastr.error(locale.common.pleaseLoginToContinue);
+                    return false;
                 }
-                return allowRoute;
             }
-        });
+          })
     }
     /**
      * Funtion to check route for authorized user 
@@ -85,7 +71,7 @@ class Application extends React.Component {
      *
      */
     checkRoute(route,nextroute,current){
-        if(route.path.split('/').length>0 && nextroute.pathname.split('/').length>0 && nextroute.pathname.split('/').length === route.path.split('/').length){
+        if(route.path && route.path.split('/').length>0 && nextroute.pathname.split('/').length>0 && nextroute.pathname.split('/').length === route.path.split('/').length){
             let r = true;
             for (let i = route.path.split('/').length - 1; i >= 0; i--) {
                 if(route.path.split('/')[i].charAt(0) === ':'){
