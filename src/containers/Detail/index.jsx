@@ -7,7 +7,7 @@ class DashboardComponent extends Component {
 
                 <h1 className="mt-4 mb-3">Post Title
                 <small>by
-                    <a href="#">Start Bootstrap</a>
+                    <a href="/">Start Bootstrap</a>
                 </small>
                 </h1>
 
