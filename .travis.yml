@@ -7,6 +7,6 @@ install:
       - npm install -g firebase-tools
       - npm install
 script:
-      - npm run build
+      - sudo npm run build
 after_success:
       - firebase deploy --token $FIREBASE_TOKEN
