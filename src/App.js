@@ -6,7 +6,6 @@ import reducer from './reducers';
 import asycMiddleWare from './middleware/asyc';
 import {setRoutes} from './route';
 import Application from './components/layouts/Application';
-import NotFound from './components/layouts/NotFoundComponent';
 import './assets/css/index.css';
 import 'toastr/build/toastr.min.css';
 
@@ -29,7 +28,6 @@ class App extends Component {
                 <BrowserRouter basename={process.env.REACT_APP_HOMEPAGE}>
                     <Switch>
                         {setRoutes(Application)}
-                        <Application component={NotFound}/>
                     </Switch>
                 </BrowserRouter>
             </Provider>);
