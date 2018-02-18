@@ -4,6 +4,15 @@ import Loader from '../components/layouts/Loader';
 import { Route } from "react-router-dom";
 import NotFound from '../components/layouts/NotFoundComponent';
 
+export const siteTitle = 'abhisreview.com | Movie Reviews by Abhi | abhisreview.';
+export const siteMetaDescription = 'Movie Reviews by Abhi | abhisreview';
+export const setTitle = (title) => {
+    document.title = (title) ? title : siteTitle;
+}
+export const setMetaDescription = (description) => {
+    document.querySelector('meta[name="description"]').setAttribute("content", (description) ? description : siteMetaDescription);
+}
+
 /**
  * List of routes for the page
  */
@@ -11,7 +20,11 @@ export const ROUTE = [
     {
         private: false,
         exact: true,
-        path: '/',
+        path: '/', 
+        meta: {
+            title: siteTitle,
+            description: siteMetaDescription,
+        },
         component: Loadable({
             loader: () => import ('../containers/Home'),
             loading: Loader,
@@ -20,7 +33,11 @@ export const ROUTE = [
     {
         private: false,
         exact: true,
-        path: '/list',
+        path: '/list', 
+        meta: {
+            title: siteTitle,
+            description: siteMetaDescription,
+        },
         component: Loadable({
             loader: () => import ('../containers/List'),
             loading: Loader,
@@ -30,6 +47,10 @@ export const ROUTE = [
         private: false,
         exact: true,
         path: '/detail/:id',
+        meta: {
+            title: siteTitle,
+            description: siteMetaDescription,
+        },
         component: Loadable({
             loader: () => import ('../containers/Detail'),
             loading: Loader,

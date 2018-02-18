@@ -57,7 +57,7 @@ class HomeComponent extends Component {
           return (
             <div className="col-lg-4 col-sm-6 portfolio-item">
               <div className="card h-100">
-                <a href={'/detail/'+content.id}>{content.title}><img className="card-img-top" src={content.image} alt="" height="200 px"/></a>
+                <a href={'/detail/' + content.id} className="card-a-top"><img className="card-img-top" src={content.image} alt={content.title}/></a>
                 <div className="card-body">
                   <h4 className="card-title">
                   <a href={'/detail/'+content.id}>{content.title}</a>
@@ -100,7 +100,7 @@ class HomeComponent extends Component {
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
               </div>
               <div className="col-md-4">
-                <a className="btn btn-lg btn-secondary btn-block" href="/list">View all</a>
+                <a className="btn btn-block btn-primary btn-lg waves-effect waves-light" href="/list">View all</a>
               </div>
             </div>
           </div>}

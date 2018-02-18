@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {db} from '../../components/firebase';
+import { db } from '../../components/firebase';
+import { setTitle, setMetaDescription } from '../../route';
 
 class DashboardComponent extends Component {
     constructor(props){
@@ -12,7 +13,8 @@ class DashboardComponent extends Component {
     componentWillMount(){
         db.collection("movies-reviews").doc('review'+this.props.match.params.id).get().then((doc)=>{
             if (doc.exists) {
-                console.log("Document data:", doc.data());
+                setTitle(doc.data().title +' | abhisreview.com | Movie Reviews by Abhi');
+                setMetaDescription(doc.data().shortcontent);
                 this.setState({content:doc.data()});
             } else {
                 console.log("No such document!");
@@ -37,7 +39,6 @@ class DashboardComponent extends Component {
         return day + ' ' + monthNames[monthIndex] + ' ' + year;
       }
     render() {
-        debugger;
         if(this.state.content && this.state.content.id){
     
         return (
@@ -116,7 +117,7 @@ class DashboardComponent extends Component {
                         </div>
                         </div>
 
-                        <div className="card my-4">
+                        <div className="card my-4" style={{display:'none'}}>
                         <h5 className="card-header">Tags</h5>
                         <div className="card-body">
                             <div className="row">

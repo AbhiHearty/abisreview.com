@@ -4,7 +4,7 @@ import { locale,avaliableLanguages } from '../../locale';
 import Authorization from '../../utility/authorization';
 import Header from './Header';
 import Footer from './Footer';
-import { ROUTE } from '../../route';
+import { ROUTE, setTitle, setMetaDescription } from '../../route';
 import toastr from 'toastr';
 import {firebase} from '../firebase';
 
@@ -33,6 +33,9 @@ class Application extends React.Component {
     render() {
         let Component = this.props.component;
         let appAuth = {login:this.handleLogIn,logout:this.handleLogout}
+        let meta = this.props.meta
+        setTitle((meta && meta.title) ? meta.title : '');
+        setMetaDescription((meta && meta.description) ? meta.description : '');
         return  <div>
                     <Header app = {appAuth} loadselectlocale={this.loadSelectLanguage} path={this.props.path} private={this.props.private} locale={locale} auth={Authorization} history = {this.props.history} location = {this.props.location} match = {this.props.match} />
                     <Component app = {appAuth} path={this.props.path} private={this.props.private} locale={locale} auth={Authorization} history = {this.props.history} location = {this.props.location} match = {this.props.match} />
