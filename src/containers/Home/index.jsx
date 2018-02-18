@@ -50,13 +50,14 @@ class HomeComponent extends Component {
         </div>);
       }
     }
+    
     loadRemaining = () => {
       return this.state.content && this.state.content.length>0 && this.state.content.map((content,index)=>{
         if(index){
           return (
             <div className="col-lg-4 col-sm-6 portfolio-item">
               <div className="card h-100">
-                <a href="#"><img className="card-img-top" src={content.image} alt="" height="200 px"/></a>
+                <a href={'/detail/'+content.id}>{content.title}><img className="card-img-top" src={content.image} alt="" height="200 px"/></a>
                 <div className="card-body">
                   <h4 className="card-title">
                   <a href={'/detail/'+content.id}>{content.title}</a>
@@ -69,6 +70,7 @@ class HomeComponent extends Component {
         }
       })
     }
+
     render() {
         return (<div>
           <header>

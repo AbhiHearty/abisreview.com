@@ -2,6 +2,89 @@ import React, { Component } from 'react';
 import {db} from '../../components/firebase';
 
 class DashboardComponent extends Component {
+
+    constructor(props){
+        super(props);
+        this.state={
+          content : [],
+          loader:1,
+          nextId: 0
+
+        }
+      }
+
+    componentWillMount(){
+        let movieRevies = db.collection("movies-reviews");
+        let datas = [];
+        let nextid=this.state.nextId;
+        movieRevies.orderBy("id", "desc").limit(1).get().then((querySnapshot)=>{
+            querySnapshot.forEach(function(doc) {
+
+                console.log(doc.id, " => ", doc.data());
+                    datas.push(doc.data());
+                    nextid = doc.data().id;
+                    console.log(nextid);
+                })
+                this.setState({content:datas,loader:0,nextId:nextid});
+        }).catch(function(error) {
+            console.log("Error getting document:", error); console.log("Error getting document:", error);
+        })
+
+      }
+
+      componentDidMount(){
+        let movieRevies = db.collection("movies-reviews");
+        let datas = this.state.content;
+        let nextid=this.state.nextId;
+
+        document.querySelector('#button').addEventListener('click',()=>{
+            console.log(this.state)
+            console.log(datas);
+            movieRevies.orderBy("id", "desc").startAfter(nextid).limit(1).get().then((querySnapshot)=> {
+            
+            console.log('get all data')
+            
+            querySnapshot.forEach(function(doc) {
+                        console.log(doc.id, " => ", doc.data());
+            
+                           datas.push(doc.data());
+            
+                        nextid = doc.data().id;
+            
+                    })
+            
+                    console.log(datas);
+                    this.setState({content:datas,loader:0,nextId:nextid});
+                
+
+            }).catch((error)=> {
+            
+                console.log("Error getting document:", error);
+            
+            })
+        })
+
+      }
+
+      loadRemaining = () => {
+        return this.state.content && this.state.content.length>0 && this.state.content.map((content,index)=>{
+            return (
+              <div className="col-lg-4 col-sm-6 portfolio-item">
+                <div className="card h-100">
+                  <a href={'/detail/'+content.id}>{content.title}><img className="card-img-top" src={content.image} alt="" height="200 px"/></a>
+                  <div className="card-body">
+                    <h4 className="card-title">
+                    <a href={'/detail/'+content.id}>{content.title}</a>
+                    </h4>
+                    <p className="card-text">{content.shortcontent}..</p>
+                  </div>
+                </div>
+              </div>
+              );
+        })
+        
+      }
+
     render() {console.log('test Dashboard');
         return (
         <div className="container">
@@ -11,78 +94,14 @@ class DashboardComponent extends Component {
   
             <ol className="breadcrumb">
             <li className="breadcrumb-item">
-                <a href="index.html">Home</a>
+            <a href="/">Home</a>
             </li>
-            <li className="breadcrumb-item active">Portfolio 3</li>
+            <li className="breadcrumb-item active">All Reviews</li>
             </ol>
-  
+            {this.state.loader == 1 && <div className="loader"><div></div></div>}
             <div className="row">
-            <div className="col-lg-4 col-sm-6 portfolio-item">
-                <div className="card h-100">
-                    <a href="/detail"><img className="card-img-top" src="http://placehold.it/700x400" alt=""/></a>
-                    <div className="card-body">
-                        <h4 className="card-title">
-                        <a  href="/detail">Project One</a>
-                        </h4>
-                        <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
-                    </div>
-                </div>
-            </div>
-            <div className="col-lg-4 col-sm-6 portfolio-item">
-                <div className="card h-100">
-                <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt=""/></a>
-                <div className="card-body">
-                    <h4 className="card-title">
-                    <a href="#">Project Two</a>
-                    </h4>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                </div>
-                </div>
-            </div>
-            <div className="col-lg-4 col-sm-6 portfolio-item">
-                <div className="card h-100">
-                <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt=""/></a>
-                <div className="card-body">
-                    <h4 className="card-title">
-                    <a href="#">Project Three</a>
-                    </h4>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-                </div>
-                </div>
-            </div>
-            <div className="col-lg-4 col-sm-6 portfolio-item">
-                <div className="card h-100">
-                <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt=""/></a>
-                <div className="card-body">
-                    <h4 className="card-title">
-                    <a href="#">Project Four</a>
-                    </h4>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                </div>
-                </div>
-            </div>
-            <div className="col-lg-4 col-sm-6 portfolio-item">
-                <div className="card h-100">
-                <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt=""/></a>
-                <div className="card-body">
-                    <h4 className="card-title">
-                    <a href="#">Project Five</a>
-                    </h4>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                </div>
-                </div>
-            </div>
-            <div className="col-lg-4 col-sm-6 portfolio-item">
-                <div className="card h-100">
-                <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt=""/></a>
-                <div className="card-body">
-                    <h4 className="card-title">
-                    <a href="#">Project Six</a>
-                    </h4>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
-                </div>
-                </div>
-            </div>
+            
+            {this.loadRemaining()}
             </div>
   
         <ul className="pagination justify-content-center">
@@ -102,7 +121,7 @@ class DashboardComponent extends Component {
             <a className="page-link" href="#">3</a>
           </li>
           <li className="page-item">
-            <a className="page-link" href="#" aria-label="Next">
+            <a id="button" className="page-link" href="#" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
               <span className="sr-only">Next</span>
             </a>
@@ -111,6 +130,7 @@ class DashboardComponent extends Component {
   
       </div>);
     }
+    
 }
 
 export default DashboardComponent;
