@@ -36,7 +36,7 @@ class header extends Component {
   render() {
     return (<Navbar dark className="bg-dark" expand="md">
       <div className="container">
-      <NavbarBrand href="/">Abhireview</NavbarBrand>
+      <NavbarBrand href="/">abhisreview</NavbarBrand>
       <NavbarToggler onClick={this.toggle} />
       <Collapse isOpen={this.state.isOpen} navbar>
         <Nav className="ml-auto" navbar>

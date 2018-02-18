@@ -9,10 +9,11 @@ class header extends Component {
         this.props.app.logout();
     }
   render() {
+    const today = new Date();
     return (
       <footer className="py-5 bg-dark">
       <div className="container">
-        <p className="m-0 text-center text-white">Copyright © Your Website 2018</p>
+        <p className="m-0 text-center text-white">Copyright &copy; {today.getFullYear()} abhisreview.com</p>
       </div>
     </footer>
     );
