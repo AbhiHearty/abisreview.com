@@ -19,7 +19,7 @@ class HomeComponent extends Component {
               })
               this.setState({content:datas,loader:0});
       }).catch(function(error) {
-          console.log("Error getting document:", error);
+          console.log("Error getting document:", error); console.log("Error getting document:", error);
       })
     }
     setPrimaryContent = () =>{
@@ -45,7 +45,7 @@ class HomeComponent extends Component {
             <p>{content.shortcontent}..</p>
           </div>
           <div className=" my-4 col-lg-6 videoWrapper">
-            <iframe src={"https://www.youtube.com/embed/"+content.youtube_trailer} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <iframe src={"https://www.youtube.com/embed/"+content.youtube_trailer} frameborder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
           </div>
         </div>);
       }
@@ -56,7 +56,7 @@ class HomeComponent extends Component {
           return (
             <div className="col-lg-4 col-sm-6 portfolio-item">
               <div className="card h-100">
-                <a href="#"><img className="card-img-top" src={content.image} alt=""/></a>
+                <a href="#"><img className="card-img-top" src={content.image} alt="" height="200 px"/></a>
                 <div className="card-body">
                   <h4 className="card-title">
                   <a href={'/detail/'+content.id}>{content.title}</a>

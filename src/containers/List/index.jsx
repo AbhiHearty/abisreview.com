@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {db} from '../../components/firebase';
 
 class DashboardComponent extends Component {
     render() {console.log('test Dashboard');
