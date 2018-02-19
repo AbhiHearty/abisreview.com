@@ -97,7 +97,7 @@ class HomeComponent extends Component {
             <hr/>
             <div className="row mb-4">
               <div className="col-md-8">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
+                <p>This page hosts the reviews of the latest Tamil Movies. It also includes a verdict about the movie basically in three categories <b><i>#OnetimeWatchabe</i></b>, <b><i>#DefinitelyWatchable</i></b>, and  <b><i>#GreatToWatch </i></b> Only after collecting the response from the people.</p>
               </div>
               <div className="col-md-4">
                 <a className="btn btn-block btn-primary btn-lg waves-effect waves-light" href="/list">View all</a>
