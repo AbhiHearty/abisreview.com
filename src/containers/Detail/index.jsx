@@ -64,7 +64,7 @@ class DashboardComponent extends Component {
 
                         <hr/>
 
-                        <p>{this.state.content.content}</p>
+                        <p dangerouslySetInnerHTML={{ __html: this.state.content.content }} />
                         
                         <hr/>
 
