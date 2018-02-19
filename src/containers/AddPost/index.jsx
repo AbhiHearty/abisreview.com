@@ -4,30 +4,26 @@ import $ from 'jquery';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
-import { db } from '../../components/firebase';
+import { db, firebase } from '../../components/firebase';
 
 class DashboardComponent extends Component {
     constructor(props) {
         super(props);
-        let dynamciValues = [];
-        dynamciValues.push(<div class="col-sm-12">
-            <div class="row">
-                <div className="col-sm-5">
-                    <input type="text" name="key1" class="form-control" placeholder="Enter key" />
-                </div>
-                <div className="col-sm-5">
-                    <input type="text" name="value1" class="form-control" placeholder="Enter value" />
-                </div>
-                <div className="col-sm-2">
-                    <button type="button" class="btn btn-danger">Remove</button>
-                </div>
-            </div>
-        </div>);
+        let dynamciValues = {};
+        dynamciValues = { ...dynamciValues, 1: this.addContent(1) };
         this.state = {
             editorState: EditorState.createEmpty(),
             dynamciValues: dynamciValues,
             dynamcivalue: 1
         }
+    }
+    logOut = () => {
+        let comp = this;
+        firebase.auth().signOut().then(function () {
+            comp.props.history.push('/login');
+        }, function (error) {
+            // An error happened.
+        });
     }
     onEditorStateChange = (editorState) => {
         this.setState({
@@ -98,20 +94,21 @@ class DashboardComponent extends Component {
         });
     }
     getDynamicCastCrew() {
-        return this.state.dynamciValues.map((value) => { return value; });
+        return Object.values(this.state.dynamciValues).map((value) => {
+            return value;
+        });
     }
     removeDynamicCastCrew = (index) => {
         //check funtionality here
-        let dynamciValues = this.state.dynamciValues.splice(index, 1);
+        let dynamciValues = this.state.dynamciValues
+        delete dynamciValues[index]; 
         this.setState({
             ...this.state,
             dynamciValues: dynamciValues
         });
     }
-    addDynamicCastCrew = (e) => {
-        let dynamciValues = this.state.dynamciValues;
-        let dynamcivalue = this.state.dynamcivalue + 1;
-        dynamciValues.push(<div class="col-sm-12">
+    addContent = (dynamcivalue) => {
+        return (<div class="col-sm-12">
             <div class="row">
                 <div className="col-sm-5">
                     <input type="text" name={"key" + dynamcivalue} class="form-control" placeholder="Enter key" />
@@ -120,10 +117,15 @@ class DashboardComponent extends Component {
                     <input type="text" name={"value" + dynamcivalue} class="form-control" placeholder="Enter value" />
                 </div>
                 <div className="col-sm-2">
-                    <button type="button" onClick={(e) => { this.removeDynamicCastCrew(dynamcivalue) }} class="btn btn-danger">Remove</button>
+                    <button type="button" onClick={(e) => { this.removeDynamicCastCrew(dynamcivalue) }} class="btn btn-danger btn-xs">Remove</button>
                 </div>
             </div>
         </div>);
+    }
+    addDynamicCastCrew = (e) => {
+        let dynamciValues = this.state.dynamciValues;
+        let dynamcivalue = this.state.dynamcivalue + 1;
+        dynamciValues[dynamcivalue] = this.addContent(dynamcivalue); 
         this.setState({
             ...this.state,
             dynamciValues: dynamciValues,
@@ -134,7 +136,7 @@ class DashboardComponent extends Component {
         const { editorState } = this.state;
         return (
             <div className="container">
-                <h1 className="mt-4 mb-3">Add post</h1>
+                <h1 className="mt-4 mb-3">Add post<button class="btn btn-danger pull-right btn-xs" onClick={this.logOut}><i class="material-icons md-24">power_settings_new</i></button></h1>
                 <button onClick={this.addToFirebase}>Add new</button>
                 <form onSubmit={this.submitForm}>
                     <div className="form-group">
@@ -142,7 +144,7 @@ class DashboardComponent extends Component {
                         <input type="text" required={true} className="form-control" id="title" name="title" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="cast_crew">Cast and Crew <button type="button" onClick={this.addDynamicCastCrew} class="btn btn-primary">Add</button></label>
+                        <label htmlFor="cast_crew">Cast and Crew <button type="button" onClick={this.addDynamicCastCrew} class="btn btn-primary btn-xs">Add</button></label>
                         {this.getDynamicCastCrew()}
                     </div>
                     <div className="form-group">

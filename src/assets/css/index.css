@@ -1154,3 +1154,6 @@
 .bg-dark {
     background-color: #0a0a0a!important;
 }
+.pull-right {
+  float: right;
+}
