@@ -1,4 +1,6 @@
 import React ,{ Component } from'react';
+import logo from '../../assets/image/logo.png'
+import logosm from '../../assets/image/logo-sm.png'
 import {
   Collapse,
   Navbar,
@@ -36,7 +38,9 @@ class header extends Component {
   render() {
     return (<Navbar dark className="bg-dark" expand="md">
       <div className="container">
-      <NavbarBrand href="/">abhisreview</NavbarBrand>
+        <NavbarBrand href="/">
+          <img className='logo-long' src={logo} />
+        </NavbarBrand>
       <NavbarToggler onClick={this.toggle} />
       <Collapse isOpen={this.state.isOpen} navbar>
         <Nav className="ml-auto" navbar>
@@ -53,29 +57,6 @@ class header extends Component {
       </Collapse>
       </div>
     </Navbar>);
-    return (
-      <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div className="container">
-        <a className="navbar-brand" href="/">Abhireviews</a>
-        <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarResponsive">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <a className="nav-link" href="/list">View all</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/">About</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/">Contact</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    );
   }
 }
 
