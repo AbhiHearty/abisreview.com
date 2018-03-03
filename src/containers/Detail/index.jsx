@@ -45,13 +45,6 @@ class DashboardComponent extends Component {
             <div className="container">
 
                 <h1 className="mt-4 mb-3">{this.state.content.title}</h1>
-                <ol className="breadcrumb">
-                <li className="breadcrumb-item">
-                    <a href="/">Home</a>
-                </li>
-                <li className="breadcrumb-item active">{this.state.content.title}</li>
-                </ol>
-
                 <div className="row">
 
                     <div className="col-lg-8">
@@ -60,7 +53,7 @@ class DashboardComponent extends Component {
 
                         <hr/>
 
-                        <p>Posted on {this.formatDate(this.state.content.created_at)} By {this.state.content.reviewby}</p>
+                        <p className="posted-info">Posted on <span className="review-date">{this.formatDate(this.state.content.created_at)}</span> </p>
 
                         <hr/>
 
@@ -74,7 +67,7 @@ class DashboardComponent extends Component {
                     <div className="col-md-4">
 
 
-                        <div className="card my-4">
+                        <div className="card">
                         <h5 className="card-header">Trailer</h5>
                         <div className="card-body">
                     
@@ -84,31 +77,78 @@ class DashboardComponent extends Component {
                         </div>
 
                         <div className="card my-4">
-                        <div className="card-body">
-                            <p><strong>Censor rating</strong> : {this.state.content.censor_rating}</p>
-                            <p><strong>Release date</strong> : {this.state.content.release_date}</p>
-                            <p><strong>Movie run time</strong> : {this.state.content.movie_run_time}</p>
-                            <p><strong>Censor Rating</strong> : {this.state.content.censor_rating}</p>
-                            <p><strong>Censor Rating</strong> : {this.state.content.censor_rating}</p>
+                        <div className="card-body movie-cast">
+                            <div className="row">
+                                <div className="col-lg-6">
+                                    <ul className="list-unstyled mb-0">
+                                        <li>
+                                            <p className="field-label">Censor rating</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="col-lg-6">
+                                    <ul className="list-unstyled mb-0">
+                                        <li>
+                                            <p className="field-value">{this.state.content.censor_rating}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-lg-6">
+                                    <ul className="list-unstyled mb-0">
+                                        <li>
+                                            <p className="field-label">Release date</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="col-lg-6">
+                                    <ul className="list-unstyled mb-0">
+                                        <li>
+                                            <p className="field-value">{this.state.content.release_date}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-lg-6">
+                                    <ul className="list-unstyled mb-0">
+                                        <li>
+                                            <p className="field-label">Movie run time</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="col-lg-6">
+                                    <ul className="list-unstyled mb-0">
+                                        <li>
+                                            <p className="field-value">{this.state.content.movie_run_time}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         </div>
 
                         <div className="card my-4">
                         <h5 className="card-header">Cast</h5>
-                        <div className="card-body">
+                        <div className="card-body detail-cast">
                             {this.state.content.cast_crew.map((crew)=>{
                                 return (<div className="row">
                                 <div className="col-lg-6">
                                     <ul className="list-unstyled mb-0">
                                         <li>
-                                            <p><strong>{crew.title}</strong></p>
+                                            <p className="field-label">{crew.title}</p>
                                         </li>
                                     </ul>
                                 </div>
                                 <div className="col-lg-6">
                                     <ul className="list-unstyled mb-0">
                                     <li>
-                                        <p>{crew.value}</p>
+                                        {crew.value.split(',').map((valueArray)=>{
+                                            return (valueArray.split('and').map((subArray)=>{ 
+                                                return (<p className="field-value">{subArray}</p>)
+                                            }));})
+                                        }
                                     </li>
                                     </ul>
                                 </div>

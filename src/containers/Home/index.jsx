@@ -25,29 +25,105 @@ class HomeComponent extends Component {
     setPrimaryContent = () =>{
       if(this.state.content && this.state.content.length){
         let content = this.state.content[0];
-        return (<div className="row" >
-          <div className=" my-4 col-lg-6" >
-            <h2><strong>Latest : </strong></h2>
-            <h4 className="card-title">
-              <a href={'/detail/'+content.id}>{content.title}</a>
-            </h4>
-            <ul>
-              <li>
-                <strong>Cast and crew</strong>
-              </li>
-              <li>{content.cast_crew[0].title} : {content.cast_crew[0].value}</li>
-              <li>{content.cast_crew[1].title} : {content.cast_crew[1].value}</li>
-              <li>{content.cast_crew[2].title} : {content.cast_crew[2].value}</li>
-              <li>{content.cast_crew[3].title} : {content.cast_crew[3].value}</li>
-              <li>{content.cast_crew[4].title} : {content.cast_crew[4].value}</li>
-              <li>{content.cast_crew[5].title} : {content.cast_crew[5].value}</li>
-            </ul>
-            <p>{content.shortcontent}..</p>
+        return (
+          <div>
+            <div className="row" >
+              <div className=" col-lg-6" >
+              <h2><strong>Latest : </strong></h2>
+              <h4 className="card-title">
+                <a href={'/detail/'+content.id}>{content.title}</a>
+              </h4>
+              </div>
+            </div>
+            <div className="row" >
+              <div className=" my-4 col-lg-6 videoWrapper">
+                <iframe src={"https://www.youtube.com/embed/"+content.youtube_trailer} frameborder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+              </div>
+              <div className=" my-4 col-lg-6" >
+              <div className="card">
+                <h5 className="card-header">Cast and crew</h5>
+                <div className="card-body cast-info">
+                  <div className="row">
+                    <div className="col-lg-4">
+                      <ul className="list-unstyled mb-0">
+                        <li><p><strong>{content.cast_crew[0].title}</strong></p></li>
+                      </ul>
+                    </div>
+                    <div className="col-lg-8">
+                      <ul className="list-unstyled mb-0">
+                        <li><p>{content.cast_crew[0].value}</p></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-lg-4">
+                      <ul className="list-unstyled mb-0">
+                        <li><p><strong>{content.cast_crew[1].title}</strong></p></li>
+                      </ul>
+                    </div>
+                    <div className="col-lg-8">
+                      <ul className="list-unstyled mb-0">
+                        <li><p>{content.cast_crew[1].value}</p></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-lg-4">
+                      <ul className="list-unstyled mb-0">
+                        <li><p><strong>{content.cast_crew[2].title}</strong></p></li>
+                      </ul>
+                    </div>
+                    <div className="col-lg-8">
+                      <ul className="list-unstyled mb-0">
+                        <li><p>{content.cast_crew[2].value}</p></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-lg-4">
+                      <ul className="list-unstyled mb-0">
+                        <li><p><strong>{content.cast_crew[3].title}</strong></p></li>
+                      </ul>
+                    </div>
+                    <div className="col-lg-8">
+                      <ul className="list-unstyled mb-0">
+                        <li><p>{content.cast_crew[3].value}</p></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-lg-4">
+                      <ul className="list-unstyled mb-0">
+                        <li><p><strong>{content.cast_crew[4].title}</strong></p></li>
+                      </ul>
+                    </div>
+                    <div className="col-lg-8">
+                      <ul className="list-unstyled mb-0">
+                        <li><p>{content.cast_crew[4].value}</p></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-lg-4">
+                      <ul className="list-unstyled mb-0">
+                        <li><p><strong>{content.cast_crew[5].title}</strong></p></li>
+                      </ul>
+                    </div>
+                    <div className="col-lg-8">
+                      <ul className="list-unstyled mb-0">
+                        <li><p>{content.cast_crew[5].value}</p></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <div className="row" >
+                <p className="movie-short-content">{content.shortcontent}..</p>
+            </div>
           </div>
-          <div className=" my-4 col-lg-6 videoWrapper">
-          <iframe src={"https://www.youtube.com/embed/"+content.youtube_trailer} frameborder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
-          </div>
-        </div>);
+        );
       }
     }
     
@@ -76,13 +152,13 @@ class HomeComponent extends Component {
           <header>
           <Carousel infiniteLoop={true} showArrows={true} autoPlay={true}>
                 <div>
-                    <img src="https://i.ytimg.com/vi/DW7vT_P3444/maxresdefault.jpg" />
+                    <img src="https://firebasestorage.googleapis.com/v0/b/abhisreview.appspot.com/o/kaala_with_name.png?alt=media&token=6beb728f-7072-4f1d-b0b5-329adc93b145" />
                 </div>
                 <div>
-                    <img src="https://i.ytimg.com/vi/YqbNeUTrXKE/maxresdefault.jpg" />
+                    <img src="https://firebasestorage.googleapis.com/v0/b/abhisreview.appspot.com/o/kaala_with_name.png?alt=media&token=6beb728f-7072-4f1d-b0b5-329adc93b145" />
                 </div>
                 <div>
-                    <img src="https://i.ytimg.com/vi/5Y6oqSWVMhA/maxresdefault.jpg" />
+                    <img src="https://firebasestorage.googleapis.com/v0/b/abhisreview.appspot.com/o/kaala_with_name.png?alt=media&token=6beb728f-7072-4f1d-b0b5-329adc93b145" />
                 </div>
             </Carousel>
           </header>
